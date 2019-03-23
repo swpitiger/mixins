@@ -1,0 +1,108 @@
+@mixin first($num, $type: false) {
+    @if ($num==1) and ($type==true) {
+        &:first-of-type {
+            @content;
+        }
+    }
+    @if ($num==1) and ($type==false) {
+        &:first-child {
+            @content;
+        }
+    }
+    @if ($num !=1) and ($type==true) {
+        &:nth-of-type(-n + #{$num}) {
+            @content;
+        }
+    }
+    @if ($num !=1) and ($type==false) {
+        &:nth-child(-n + #{$num}) {
+            @content;
+        }
+    }
+}
+@mixin last($num, $type: false) {
+    @if ($num==1) and ($type==true) {
+        &:last-of-type {
+            @content;
+        }
+    }
+    @if ($num==1) and ($type==false) {
+        &:last-child {
+            @content;
+        }
+    }
+    @if ($num !=1) and ($type==true) {
+        &:nth-last-of-type(-n + #{$num}) {
+            @content;
+        }
+    }
+    @if ($num !=1) and ($type==false) {
+        &:nth-last-child(-n + #{$num}) {
+            @content;
+        }
+    }
+}
+@mixin after($num, $type: false) {
+    @if $type==true {
+        &:nth-of-type(n+#{$num + 1}) {
+            @content;
+        }
+    }
+    @else {
+        &:nth-child(n + #{$num + 1}) {
+            @content;
+        }
+    }
+}
+
+@mixin from-end($num, $type: false) {
+    @if $type==true {
+        &:nth-last-of-type(#{$num}) {
+            @content;
+        }
+    }
+    @else {
+        &:nth-last-child(#{$num}) {
+            @content;
+        }
+    }
+}
+
+@mixin between($first, $last, $type: false) {
+    @if $type==true {
+        &:nth-of-type(n + #{$first}):nth-of-type(-n + #{$last}) {
+            @content;
+        }
+    }
+    @else {
+        &:nth-child(n + #{$first}):nth-child(-n + #{$last}) {
+            @content;
+        }
+    }
+}
+
+@mixin all-but($num, $type: false) {
+    @if $type==true {
+        &:not(:nth-of-type(#{$num})) {
+            @content;
+        }
+    }
+    @else {
+        &:not(:nth-child(#{$num})) {
+            @content;
+        }
+    }
+}
+
+@mixin each($num, $type: false) {
+    @if $type==true {
+        &:nth-of-type(#{$num}n) {
+            @content;
+        }
+    }
+    @else {
+        &:nth-child(#{$num}n) {
+            @content;
+        }
+    }
+}
